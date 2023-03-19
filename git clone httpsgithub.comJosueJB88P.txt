@@ -1,0 +1,23 @@
+ "git clone https://github.com/JosueJB88/PostgreSQL.git",
+      "cd PostgreSQL",
+      "docker-compose up"
+
+
+
+
+
+
+
+
+
+resource "digitalocean_firewall" "jenkins" {
+  name = "jenkins-firewall"
+  
+  droplet_ids = [digitalocean_droplet.josue.id]
+  
+  inbound_rule {
+    protocol = "tcp"
+    port_range = "8080"
+    source_addresses = ["0.0.0.0/0"]
+  }
+}
